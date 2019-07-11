@@ -3,15 +3,28 @@
            https://api.github.com/users/<your name>
   
 */
+const username = "hamidoudiallo96";
+const promise = axios.get(`https://api.github.com/users/${username}`);
 
-const followersArray = ['hamidoudiallo96',"jusrockinout","leananepari","tfaramar","projectLewis","TomHessburg","DeejayEaster","rich-fswd21","bryanszendel","mjherich","tetondan","dustinmyers","justsml","luishrd","bigknell","seanwu20"];
+const cards = document.querySelector('.cards');
 
-const username = followersArray.forEach(item =>{
-  const promise = axios.get(`https://api.github.com/users/${item}`);
+promise
+.then(data =>{
+  console.log(data,'data');
+  myProfile(data.data);
+    
+}) 
+.catch(data =>{
+  console.log(data,'This failed');
+});
+const followersArray = ['AlexisPanyathong',"jusrockinout","leananepari","tfaramar","projectLewis","TomHessburg","DeejayEaster","rich-fswd21","bryanszendel","mjherich","tetondan","dustinmyers","justsml","luishrd","bigknell","seanwu20"];
 
-  const cards = document.querySelector('.cards');
 
-  promise
+followersArray.forEach(item =>{
+  const promise1 = axios.get(`https://api.github.com/users/${item}`);
+
+
+  promise1
   .then(data =>{
     console.log(data,'data');
     myProfile(data.data);
