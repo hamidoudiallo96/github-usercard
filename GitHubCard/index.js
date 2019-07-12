@@ -109,6 +109,14 @@ const myProfile = (obj) => {
     cardInfo.classList.add('card-info');
     head3.classList.add('name');
     para1.classList.add('username');
+
+     // setting image src
+     console.log(obj.avatar_url);
+     image.src = obj.avatar_url;
+     anchor.setAttribute('href', `${obj.html_url}`);
+     anchor.textContent = `${obj.html_url}`;
+     para3.textContent = "Profile: ";
+     
   
     // appending:
     card.appendChild(image);
@@ -121,17 +129,14 @@ const myProfile = (obj) => {
     cardInfo.appendChild(para4);
     cardInfo.appendChild(para5);
     cardInfo.appendChild(para6);
+    
   
   
-    // setting image src
-    console.log(obj.avatar_url)
-    image.src = `${obj.avatar_url}`;
+   
   
     // adding text:
     head3.textContent = `${obj.name}`;
-    anchor.textContent = `${obj.html_url}`;
     para2.textContent = `Location: ${obj.location}`;
-    para3.textContent = "Profile:";
     para4.textContent = `Followers: ${obj.followers} `;
     para5.textContent = `Following: ${obj.following} `;
     para6.textContent = `Bio: ${obj.bio} `;
@@ -140,3 +145,5 @@ const myProfile = (obj) => {
     return document.querySelector('.cards').appendChild(card);
   };
   
+
+  // const promise1 = 
