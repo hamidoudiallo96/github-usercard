@@ -1,12 +1,47 @@
 /* Step 1: using axios, send a GET request to the following URL 
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
+  
 */
+const username = "hamidoudiallo96";
+const promise = axios.get(`https://api.github.com/users/${username}`);
+
+const cards = document.querySelector('.cards');
+
+promise
+.then(data =>{
+  console.log(data,'data');
+  myProfile(data.data);
+    
+}) 
+.catch(data =>{
+  console.log(data,'This failed');
+});
+const followersArray = ['AlexisPanyathong',"jusrockinout","leananepari","tfaramar","projectLewis","TomHessburg","DeejayEaster","rich-fswd21","bryanszendel","mjherich","tetondan","dustinmyers","justsml","luishrd","bigknell","seanwu20"];
+
+
+followersArray.forEach(item =>{
+  const promise1 = axios.get(`https://api.github.com/users/${item}`);
+
+
+  promise1
+  .then(data =>{
+    console.log(data,'data');
+    myProfile(data.data);
+    
+  }) 
+  .catch(data =>{
+    console.log(data,'This failed');
+  });
+});
+
+
+
+
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
-
    Skip to Step 3.
 */
 
@@ -24,11 +59,10 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
-
 <div class="card">
   <img src={image url of user} />
   <div class="card-info">
@@ -43,7 +77,6 @@ const followersArray = [];
     <p>Bio: {users bio}</p>
   </div>
 </div>
-
 */
 
 /* List of LS Instructors Github username's: 
@@ -53,3 +86,64 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+const myProfile = (obj) => {
+    // element creation
+   
+    const card = document.createElement('div');
+    const image = document.createElement('img');
+    const cardInfo = document.createElement('div');
+    const head3 = document.createElement('h3');
+    const para1 = document.createElement('p');
+    const para2 = document.createElement('p');
+    const para3 = document.createElement('p');
+    const anchor = document.createElement('a');
+    const para4 = document.createElement('p');
+    const para5 = document.createElement('p');
+    const para6 = document.createElement('p');
+  
+  
+    // adding classes
+  
+    card.classList.add('card');
+    cardInfo.classList.add('card-info');
+    head3.classList.add('name');
+    para1.classList.add('username');
+
+     // setting image src
+     console.log(obj.avatar_url);
+     image.src = obj.avatar_url;
+     anchor.setAttribute('href', `${obj.html_url}`);
+     anchor.textContent = `${obj.html_url}`;
+     para3.textContent = "Profile: ";
+     
+  
+    // appending:
+    card.appendChild(image);
+    card.appendChild(cardInfo);
+    cardInfo.appendChild(head3);
+    cardInfo.appendChild(para1);
+    cardInfo.appendChild(para2);
+    cardInfo.appendChild(para3);
+    para3.appendChild(anchor);
+    cardInfo.appendChild(para4);
+    cardInfo.appendChild(para5);
+    cardInfo.appendChild(para6);
+    
+  
+  
+   
+  
+    // adding text:
+    head3.textContent = `${obj.name}`;
+    para2.textContent = `Location: ${obj.location}`;
+    para4.textContent = `Followers: ${obj.followers} `;
+    para5.textContent = `Following: ${obj.following} `;
+    para6.textContent = `Bio: ${obj.bio} `;
+  
+    
+    return document.querySelector('.cards').appendChild(card);
+  };
+  
+
+  // const promise1 = 
